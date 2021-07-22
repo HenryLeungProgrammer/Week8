@@ -10,8 +10,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+/**
+ * @author Tianle Liang
+ * @studnet Name: 040922323
+ * @version 1.0 Week8
+ */
 public class MessageListFragment extends Fragment {
 
+    boolean isTablet = true;
+
+    public MessageListFragment(boolean isT){
+        isTablet = isT;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
@@ -30,7 +40,11 @@ public class MessageListFragment extends Fragment {
             FragmentManager fMgr = parentActivity.getSupportFragmentManager(); //getSupportFragmentManager(); // because it extends Fragment class
             FragmentTransaction tx = fMgr.beginTransaction();
 
+            if(isTablet)
+                tx.add(R.id.detailsLocation, theFragment);
+            else
             tx.add(R.id.fragmentLocation, theFragment);
+
             tx.commit();
 
         });
@@ -43,3 +57,9 @@ public class MessageListFragment extends Fragment {
         return thisLayout;
     }
 }
+
+// 1024 x 768  smallest 768
+// 768 x 1024  smallest 768 as well
+
+//Pixel 3 API29   1080 x 2160
+//Pixel 4XL API27 1440 X 3040
